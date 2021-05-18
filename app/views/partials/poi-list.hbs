@@ -7,6 +7,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Added By</th>
+        <th>Location</th>
         <th>Picture</th>
         <th>Update</th>
         <th>Remove</th>
@@ -17,6 +18,7 @@
                 <td>{{name}}</td>
                 <td>{{description}}</td>
                 <td>{{creator.firstName}} {{creator.lastName}}</td>
+                <td> Lat: {{latitude}}  Long: {{longitude}}</td>
                 <td> <img src="{{imageUrl}}" class="ui medium image"/></td>
                 <td><a href="updatePoi/{{_id}}"><button class="negative ui right floated button">Update</button></a></td>
                 <td><a href="deletePoi/{{_id}}"><button class="negative ui right floated button">Delete</button></a></td>
