@@ -1,5 +1,5 @@
-# poi-core
-WIT HDip Computer Science - Assignment 1 Enterprise Web Development 
+# Assignment 2 for Enterprise Web Development 
+WIT HDip Computer Science - Assignment 2 Enterprise Web Development 
 This project demonstrates a simple point of interest (POI) web application.
 Completed to good standard of marking rubric.
 
