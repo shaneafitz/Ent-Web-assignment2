@@ -34,6 +34,8 @@ const Pois = {
         const newPoi = new Poi({
           name: data.name,
           description: data.description,
+          latitude: data.latitude,
+          longitude: data.longitude,
           creator: user._id,
           imageUrl: url,
         });
