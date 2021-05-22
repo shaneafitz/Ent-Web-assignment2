@@ -10,6 +10,7 @@ const Pois = {
       return pois;
     },
   },
+
   findOne: {
     auth: false,
     handler: async function (request, h) {
@@ -24,6 +25,7 @@ const Pois = {
       }
     },
   },
+
   create: {
     auth: false,
     handler: async function (request, h) {
@@ -37,6 +39,25 @@ const Pois = {
         return h.response(poi).code(201);
       }
       return Boom.badImplementation("error creating poi");
+    },
+  },
+
+  deleteAll: {
+    auth: false,
+    handler: async function(request, h){
+      await Poi.remove({});
+      return {success: true};
+    },
+  },
+
+  deleteOne: {
+    auth: false,
+    handler: async function(request, h) {
+      const response = await Poi.deleteOne({ _id: request.params.id });
+      if (response.deletedCount == 1) {
+        return { success: true };
+      }
+      return Boom.notFound('id not found');
     },
   },
 

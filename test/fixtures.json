@@ -1,0 +1,49 @@
+{
+  "poiService": "http://localhost:3000",
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret"
+    }
+  ],
+  "newUser": {
+    "firstName": "Maggie",
+    "lastName": "Simpson",
+    "email": "maggie@simpson.com",
+    "password": "secret"
+  },
+  "poi": [
+    {
+      "name": "Dursey Island",
+      "description": "Off the coast of Cork",
+      "latitude": "52.666",
+      "longitude": "-7.66"
+    },
+    {
+      "name": "Skellig Island",
+      "description": "Off the coast of Kerry",
+      "latitude": "53.666",
+      "longitude": "-8.66"
+    },
+    {
+      "name": "Clare Island",
+      "description": "Off the coast of Mayo",
+      "latitude": "54.666",
+      "longitude": "-9.66"
+    }
+  ]
+}
