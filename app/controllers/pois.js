@@ -71,7 +71,8 @@ const Pois = {
   showPoiSettings: {
     handler: async function (request, h) {
       try {
-        const poi = await Poi.findById(request.params.id);
+        const poi = await Poi.findById(request.params.id).lean();
+        console.log("id", poi);
         return h.view("updatepoi", { title: "Update POI", poi: poi });
       } catch (e) {
         return h.view("main", { errors: [{ message: e.message }] });
@@ -83,6 +84,8 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         description: Joi.string().required(),
+        latitude: Joi.string().required(),
+        longitude: Joi.string().required(),
       },
       options: {
         abortEarly: false,
