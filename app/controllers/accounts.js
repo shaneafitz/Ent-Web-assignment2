@@ -2,6 +2,9 @@
 const User = require("../models/user");
 const Boom = require("@hapi/boom");
 const Joi = require("@hapi/joi");
+const sanitize = require('../utils/sanitize-html');
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
 
 const Accounts = {
   index: {
@@ -41,16 +44,19 @@ const Accounts = {
     handler: async function (request, h) {
       try {
         const payload = request.payload;
+        const hash = await bcrypt.hash(payload.password, saltRounds);
         let user = await User.findByEmail(payload.email);
         if (user) {
           const message = "Email address is already registered";
           throw Boom.badData(message);
         }
+        const firstName = sanitize(payload.firstName);
+        const lastName = sanitize(payload.lastName);
         const newUser = new User({
-          firstName: payload.firstName,
-          lastName: payload.lastName,
+          firstName: firstName,
+          lastName: lastName,
           email: payload.email,
-          password: payload.password,
+          password: hash,
         });
         user = await newUser.save();
         request.cookieAuth.set({ id: user.id });
@@ -100,7 +106,11 @@ const Accounts = {
         user.firstName = userEdit.firstName;
         user.lastName = userEdit.lastName;
         user.email = userEdit.email;
-        user.password = userEdit.password;
+        if(userEdit.password)
+        {
+          const hash = await bcrypt.hash(userEdit.password, saltRounds);
+          user.password = hash;
+        }
         await user.save();
         return h.redirect("/settings");
       } catch (err) {
