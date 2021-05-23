@@ -23,8 +23,8 @@ const Accounts = {
     auth: false,
     validate: {
       payload: {
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),
+        firstName: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/), // start with uppercase and 2 plus lower case letters
+        lastName: Joi.string().required().regex(/^[A-Z]/).min(3),
         email: Joi.string().email().required(),
         password: Joi.string().required(),
       },

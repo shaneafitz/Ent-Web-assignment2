@@ -1,29 +1,54 @@
 <div class="uk-margin uk-width-3xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
-    <table class="uk-table">
-        <caption>
-            Islands
-        </caption>
-        <thead>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Added By</th>
-        <th>Location</th>
-     <!--   <th>Picture</th> -->
-        <th>Update</th>
-        <th>Remove</th>
-        </thead>
-        <tbody class="uk-text-left">
-        {{#each pois}}
-            <tr>
-                <td>{{name}}</td>
-                <td>{{description}}</td>
-                <td>{{creator.firstName}} {{creator.lastName}}</td>
-                <td> Lat: {{latitude}}  Long: {{longitude}}</td>
-              <!--    <td> <img src="{{imageUrl}}" class="ui medium image"/></td> -->
-                <td><a href="updatePoi/{{_id}}"><button class="negative ui right floated button">Update</button></a></td>
-                <td><a href="deletePoi/{{_id}}"><button class="negative ui right floated button">Delete</button></a></td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
+  <table class="uk-table">
+    <caption>
+      Islands
+    </caption>
+    <thead>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Added By</th>
+    <th>Location</th>
+    <!--   <th>Picture</th> -->
+    <th>Update</th>
+    <th>Remove</th>
+    </thead>
+    <tbody class="uk-text-left">
+    {{#each pois}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+        <td>{{creator.firstName}} {{creator.lastName}}</td>
+        <td> Lat: {{latitude}} <br /> Long: {{longitude}}</td>
+        <!--    <td> <img src="{{imageUrl}}" class="ui medium image"/></td> -->
+        <td><a href="updatePoi/{{_id}}">
+          <button class="negative ui right floated button">Update</button>
+        </a></td>
+        <td><a href="deletePoi/{{_id}}">
+          <button class="negative ui right floated button">Delete</button>
+        </a></td>
+      </tr>
+    {{/each}}
+    </tbody>
+    <div>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <div class="center">
+        <style>
+          #map {
+            height: 700px;
+          }
+        </style>
+      </div>
+      <div id="map"></div>
+      <script>
+        var map = L.map("map").setView([53.4286, -8.3320], 6.5);
+        L.tileLayer("https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=lf6wzg5OvtmWsOgoIj2t", {
+          attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e"
+        }).addTo(map);
+          {{#each pois}}
+          markerPopup = L.popup().setContent("{{name}}");
+          locationMarker = L.marker([{{latitude}}, {{longitude}}], {}).bindPopup(markerPopup).addTo(map);
+          {{/each}}
+      </script>
+    </div>
 </div>
